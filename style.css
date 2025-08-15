@@ -1,0 +1,299 @@
+@font-face {
+  font-family: "DMSans";
+  font-weight: 400 500;
+  src: url("./assets/fonts/DMSans-VariableFont_opsz\,wght.ttf");
+}
+
+@font-face {
+  font-family: "DMSans";
+  font-style: italic;
+  font-weight: 400 500;
+  src: url("./assets/fonts/DMSans-Italic-VariableFont_opsz\,wght.ttf");
+}
+
+:root {
+  --purple-100: hsl(254, 88%, 90%);
+  --purple-500: hsl(256, 67%, 59%);
+
+  --yellow-100: hsl(31, 66%, 93%);
+  --yellow-500: hsl(39, 100%, 71%);
+
+  --off-white: hsl(0, 0%, 98%);
+  --white: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 7%);
+
+  --fs-reg: 1.25rem;
+  --fs-mid: 2.25rem;
+  --fs-lg: 3rem;
+  --fs-xl: 4rem;
+}
+
+@layer reset {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer base {
+  body {
+    font-family: "DMSans", sans-serif;
+    font-size: var(--fs-reg);
+    color: var(--foreground-color, var(--black));
+    background-color: var(--background-color, var(--off-white));
+    line-height: 1.3;
+    margin: 34px;
+  }
+
+  h1 {
+    color: var(--heading-foreground, inherit);
+    font-size: var(--heading-font-size, var(--fs-mid));
+    font-weight: 500;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  .font-style {
+    color: var(--span-color, inherit);
+    display: var(--span-display, inline);
+    font-style: var(--span-font-style, normal);
+    font-size: var(--span-font-size, inherit);
+    font-weight: var(--span-font-weight, inherit);
+  }
+
+  .color {
+    color: var(--span-color-2, inherit);
+    display: var(--span-display-2, inline);
+    font-style: var(--span-font-style-2, normal);
+    font-size: var(--span-font-size-2, inherit);
+    font-weight: var(--span-font-weight-2, inherit);
+  }
+
+  p {
+    color: var(--paragraph-foreground, inherit);
+    font-size: var(--paragraph-font-size, var(--fs-reg));
+    font-weight: 400;
+    line-height: 1.1;
+  }
+}
+
+@layer layout {
+  .grid {
+    display: grid;
+    gap: 32px;
+    margin-inline: auto;
+    max-inline-size: 1200px;
+    grid-template-areas:
+      "one"
+      "two"
+      "three"
+      "four"
+      "five"
+      "six"
+      "seven"
+      "eight";
+
+    @media (width >= 550px) {
+      grid-template-areas:
+        "one one"
+        "two three"
+        "five five"
+        "six four"
+        "seven four"
+        "eight eight";
+    }
+
+    @media (width >= 900px) {
+      grid-template-areas:
+        "seven one one four"
+        "seven two three four"
+        "eight two three four"
+        "eight six five five";
+    }
+  }
+
+  .grid > * {
+    background-color: var(--grid-item-background, var(--white));
+    border-radius: var(--grid-border-radius, 18px);
+    color: var(--grid-foreground-color, var(--black));
+    padding: var(--grid-item-padding, 24px);
+
+    overflow: clip;
+
+    display: flex;
+    flex-direction: var(--card-direction, column);
+    gap: var(--grid-gap, 16px);
+    align-items: var(--grid-item-align, start);
+    align-content: var(--grid-content-align, start);
+    justify-content: var(--grid-item-align-horizontal, start);
+    text-align: var(--grid-text-align, start);
+  }
+
+  .grid img {
+    max-width: var(--bento-card-image-max-width, 100%);
+    width: var(--bento-card-image-width, 100%);
+    order: var(--bento-card-image-order);
+  }
+
+  .grid > :nth-child(1) {
+    grid-area: one;
+    --grid-item-background: var(--purple-500);
+    --grid-foreground-color: var(--white);
+    --grid-item-align: center;
+    --grid-text-align: center;
+    --grid-item-padding: 48px;
+    --span-font-style: italic;
+    --span-color-2: var(--yellow-500);
+    --heading-font-size: var(--fs-xl);
+    --grid-gap: 28px;
+    --paragraph-font-size: var(--fs-reg);
+    --bento-card-image-max-width: 80%;
+
+    @media (width >= 550px) {
+      --bento-card-image-max-width: 60%;
+    }
+
+    @media (width >= 900px) {
+      --bento-card-image-max-width: 50%;
+    }
+  }
+  .grid > :nth-child(2) {
+    grid-area: two;
+    --grid-item-align: center;
+    --bento-card-image-order: -1;
+    --heading-font-size: var(--fs-mid);
+    --bento-card-image-max-width: 100%;
+
+    > img {
+      filter: drop-shadow(0 0 1rem hsl(0 0% 0% / 0.25));
+      border-radius: 100vw;
+    }
+
+    @media (width >= 900px) {
+      --bento-card-image-max-width: 100%;
+    }
+  }
+
+  .grid > :nth-child(3) {
+    grid-area: three;
+    --grid-item-background: var(--yellow-500);
+    --grid-foreground-color: var(--black);
+    --grid-item-padding: 32px;
+    --heading-font-size: var(--fs-mid);
+    --bento-card-image-max-width: 75%;
+    > img {
+      margin-bottom: -50px;
+    }
+
+    @media (width >= 900px) {
+      --bento-card-image-max-width: 100%;
+    }
+  }
+
+  .grid > :nth-child(4) {
+    grid-area: four;
+    --grid-item-background: var(--purple-100);
+    --grid-item-padding: 32px;
+    --heading-font-size: var(--fs-mid);
+    --bento-card-image-max-width: 75%;
+    --grid-item-align: center;
+    --grid-item-align-horizontal: center;
+    --grid-text-align: center;
+    --grid-gap: 24px;
+
+    @media (width >= 550px) {
+      --bento-card-image-max-width: 100%;
+    }
+
+    @media (width >= 900px) {
+      > img {
+        scale: 2;
+        margin-right: -150px;
+        margin-top: 75px;
+        margin-bottom: 75px;
+      }
+    }
+  }
+
+  .grid > :nth-child(5) {
+    grid-area: five;
+    --grid-item-background: var(--purple-500);
+    --grid-foreground-color: var(--white);
+    --grid-item-padding: 32px;
+    --heading-font-size: var(--fs-lg);
+    --bento-card-image-max-width: 70%;
+    --bento-card-image-order: -1;
+    --grid-item-align: center;
+    --grid-item-align-horizontal: center;
+    --grid-text-align: center;
+
+    @media (width >= 900px) {
+      --bento-card-image-max-width: 50%;
+      --card-direction: row;
+      --grid-item-align: center;
+      --grid-item-align-horizontal: center;
+      --grid-text-align: center;
+    }
+  }
+
+  .grid > :nth-child(6) {
+    grid-area: six;
+    --grid-item-background: var(--white);
+    --grid-foreground-color: var(--black);
+    --grid-item-padding: 32px;
+    --heading-font-size: var(--fs-xl);
+    --bento-card-image-max-width: 70%;
+    --span-display: block;
+    --span-font-size: var(--fs-mid);
+    font-weight: 400;
+
+    @media (width >= 900px) {
+      --bento-card-image-max-width: 100%;
+    }
+  }
+
+  .grid > :nth-child(7) {
+    grid-area: seven;
+    --grid-item-background: var(--yellow-100);
+    --grid-foreground-color: var(--black);
+    --grid-item-padding: 32px;
+    --heading-font-size: var(--fs-lg);
+    --bento-card-image-max-width: 70%;
+    --grid-gap: 32px;
+    --span-color: var(--purple-500);
+    --span-font-style: italic;
+
+    @media (width >= 900px) {
+      --bento-card-image-max-width: 100%;
+    }
+  }
+
+  .grid > :nth-child(8) {
+    grid-area: eight;
+    --grid-item-background: var(--yellow-500);
+    --grid-foreground-color: var(--black);
+    --grid-item-padding: 32px;
+    --heading-font-size: var(--fs-lg);
+    --bento-card-image-max-width: 80%;
+
+    @media (width >= 550px) {
+      --bento-card-image-max-width: 70%;
+    }
+
+    @media (width >= 900px) {
+      --bento-card-image-max-width: 100%;
+    }
+  }
+}
+
+@layer utilities {
+  .visually-first {
+    order: -1;
+  }
+}
